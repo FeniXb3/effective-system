@@ -3,7 +3,12 @@ Console.WriteLine("Hello, World!");
 Console.WriteLine("Effective System");
 Console.WriteLine("Bye!");
 
-Player hero = new Player();
+// Player hero = new Player(10, 3);
+Point playerPosition = new Point(10, 3);
+Player hero = new Player(playerPosition);
+playerPosition.X = 0;
+// hero.X = 10;
+// hero.Y = 3;
 Console.WriteLine(hero.Hp);
 hero.Hp = 90;
 Console.WriteLine(hero.Hp);
@@ -18,7 +23,7 @@ Console.WriteLine(hero.Hp);
 while (true)
 {
     Console.Clear();
-    Console.SetCursorPosition(hero.X, hero.Y);
+    Console.SetCursorPosition(hero.Position.X, hero.Position.Y);
     Console.Write("@");
     //Console.WriteLine($"X: {hero.X} Y: {hero.Y}");
     hero.Move();
