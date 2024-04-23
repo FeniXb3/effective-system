@@ -10,6 +10,7 @@ class Player
     public int MaxHp { get; private set; } = 100;
 
     public Point Position { get; set; }
+    public Point PreviousPosition { get; set;}
 
     private Dictionary<ConsoleKey, Point> directions = new()
     {
@@ -20,6 +21,7 @@ class Player
     public Player(int x, int y)
     {
         Position = new Point(x, y);
+        PreviousPosition = new Point(x, y);
     }
 
     public Player(Point startingPosition)
@@ -27,6 +29,7 @@ class Player
         // Position = startingPosition;
         // Position = new Point(startingPosition.X, startingPosition.Y);
         Position = new Point(startingPosition);
+        PreviousPosition = new Point(startingPosition);
         // directions.Add(ConsoleKey.A, new Point(-1, 0));
         // directions.Add(ConsoleKey.A, new Point(1, 0));
         // directions[ConsoleKey.A] = new Point(-1, 0);
@@ -47,28 +50,11 @@ class Player
     {
         ConsoleKeyInfo pressedKey = Console.ReadKey(true);
 
-        // if (pressedKey.Key == ConsoleKey.A)
-        // {
-        //     direction = new Point(-1, 0);
-        // }
-        // else if (pressedKey.Key == ConsoleKey.D)
-        // {
-        //     direction = new Point(1, 0);
-        // }
-        // else if (pressedKey.Key == ConsoleKey.W)
-        // {
-        //     direction = new Point(0, -1);
-        // }
-        // else if (pressedKey.Key == ConsoleKey.S)
-        // {
-        //     direction = new Point(0, 1);
-        // }
-        // else
-        // {
-        //     direction = new Point(0, 0);
-        // }
         if (directions.ContainsKey(pressedKey.Key))
         {
+            PreviousPosition.X = Position.X;
+            PreviousPosition.Y = Position.Y;
+            
             Point direction = directions[pressedKey.Key];
             Position.X += direction.X;
             Position.Y += direction.Y;

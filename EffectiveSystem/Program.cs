@@ -47,13 +47,18 @@ string[] map = {
     "###########",
 };
 
+Console.Clear();
+foreach (string row in map)
+{
+    Console.WriteLine(row);
+}
+
 while (true)
 {
-    Console.Clear();
-    foreach (string row in map)
-    {
-        Console.WriteLine(row);
-    }
+    string previousRow = map[hero.PreviousPosition.Y];
+    char previousCell = previousRow[hero.PreviousPosition.X];
+    Console.SetCursorPosition(hero.PreviousPosition.X, hero.PreviousPosition.Y);
+    Console.WriteLine(previousCell);
 
     Console.SetCursorPosition(hero.Position.X, hero.Position.Y);
     Console.Write("@");
