@@ -20,9 +20,41 @@ hero.Hp = 9001;
 
 Console.WriteLine(hero.Hp);
 
+
+/*
+
+###########
+#.........#
+#.........#
+#.........#
+#.........#
+#.........#
+#.........#
+############
+
+*/
+
+string[] map = {
+    "###########",
+    "#.........#",
+    "#.........#",
+    "#.........#",
+    "#.........#",
+    "#.........#",
+    "#.........#",
+    "#.........#",
+    "#.........#",
+    "###########",
+};
+
 while (true)
 {
     Console.Clear();
+    foreach (string row in map)
+    {
+        Console.WriteLine(row);
+    }
+
     Console.SetCursorPosition(hero.Position.X, hero.Position.Y);
     Console.Write("@");
     //Console.WriteLine($"X: {hero.X} Y: {hero.Y}");
