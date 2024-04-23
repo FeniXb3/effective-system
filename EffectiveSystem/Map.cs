@@ -4,29 +4,36 @@
 
 class Map
 {
-    private string[] mapData;
+    private char[][] mapData;
 
     public Map()
     {
-        mapData = new string[] {
-            "###########",// 0
-            "#.........#", // 1
-            "#.........#", // 2
-            "#.........#", // 3
-            "#....#....#", // ...
-            "#.........#",
-            "#.........#",
-            "#.........#",
-            "#.........#",
-            "###########",
+        mapData = new char[][] {
+            new char[] {'#','#','#','#','#','#','#','#','#','#','#',},
+            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
+            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
+            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
+            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
+            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
+            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
+            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
+            new char[] {'#','#','#','#','#','#','#','#','#','#','#',},
         };
     }
 
     public void Display()
     {
-        foreach (string row in mapData)
+        // foreach (char[] row in mapData)
+        // {
+        //     Console.WriteLine(row);
+        // }
+        for (int y = 0; y < mapData.Length; y++)
         {
-            Console.WriteLine(row);
+            for (int x = 0; x < mapData[y].Length; x++)
+            {
+                Console.Write(mapData[y][x]);
+            }
+            Console.WriteLine();
         }
     }
 
