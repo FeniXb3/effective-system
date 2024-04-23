@@ -2,22 +2,27 @@
 
 
 
+
 class Map
 {
-    private char[][] mapData;
+    private int[][] mapData;
+    private Dictionary<int, char> cellVisuals = new Dictionary<int, char>() {
+        { 0, '.'},
+        { 1, '#'},
+    };
 
     public Map()
     {
-        mapData = new char[][] {
-            new char[] {'#','#','#','#','#','#','#','#','#','#','#',},
-            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
-            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
-            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
-            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
-            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
-            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
-            new char[] {'#','.','.','.','.','.','.','.','.','.','#',},
-            new char[] {'#','#','#','#','#','#','#','#','#','#','#',},
+        mapData = new int[][] {
+            new int[] {1,1,1,1,1,1,1,1,1,1,1,},
+            new int[] {1,0,0,0,0,0,0,0,0,0,1,},
+            new int[] {1,0,0,0,0,0,0,0,0,0,1,},
+            new int[] {1,0,0,0,0,0,0,0,0,0,1,},
+            new int[] {1,0,0,0,0,1,0,0,0,0,1,},
+            new int[] {1,0,0,0,0,0,0,0,0,0,1,},
+            new int[] {1,0,0,1,0,0,0,0,0,0,1,},
+            new int[] {1,0,0,0,0,0,0,0,0,0,1,},
+            new int[] {1,1,1,1,1,1,1,1,1,1,1,},
         };
     }
 
@@ -31,15 +36,22 @@ class Map
         {
             for (int x = 0; x < mapData[y].Length; x++)
             {
-                Console.Write(mapData[y][x]);
+                int cellValue = mapData[y][x];
+                char cellVisual = cellVisuals[cellValue];
+                Console.Write(cellVisual);
             }
             Console.WriteLine();
         }
     }
 
-    internal char GetCellAt(Point point)
+    internal int GetCellAt(Point point)
     {
         return mapData[point.Y][point.X];
+    }
+
+    internal char GetCellVisualAt(Point point)
+    {
+        return cellVisuals[GetCellAt(point)];
     }
 
     internal bool IsPointValid(Point point)
@@ -48,7 +60,7 @@ class Map
         {
             if (point.X >= 0 && point.X < mapData[point.Y].Length)
             {
-                if (GetCellAt(point) != '#')
+                if (GetCellAt(point) != 1)
                 {
                     return true;
                 }

@@ -42,7 +42,7 @@ map.Display();
 
 while (true)
 {
-    char previousCell = map.GetCellAt(hero.PreviousPosition);
+    var previousCell = map.GetCellVisualAt(hero.PreviousPosition);
     Console.SetCursorPosition(hero.PreviousPosition.X, hero.PreviousPosition.Y);
     Console.WriteLine(previousCell);
 
