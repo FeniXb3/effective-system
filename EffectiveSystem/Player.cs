@@ -46,19 +46,27 @@ class Player
         Hp += 10;
     }
 
-    public void Move()
+    public Point GetNextPosition()
     {
+        Point nextPosition = new Point(Position);
         ConsoleKeyInfo pressedKey = Console.ReadKey(true);
-
         if (directions.ContainsKey(pressedKey.Key))
         {
-            PreviousPosition.X = Position.X;
-            PreviousPosition.Y = Position.Y;
-            
             Point direction = directions[pressedKey.Key];
-            Position.X += direction.X;
-            Position.Y += direction.Y;
+            nextPosition.X += direction.X;
+            nextPosition.Y += direction.Y;
         }
+
+        return nextPosition;
+    }
+
+    public void Move(Point targetPosition)
+    {
+        PreviousPosition.X = Position.X;
+        PreviousPosition.Y = Position.Y;
+
+        Position.X = targetPosition.X;
+        Position.Y = targetPosition.Y;
     }
 }
 

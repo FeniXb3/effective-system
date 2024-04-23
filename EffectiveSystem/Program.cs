@@ -35,11 +35,11 @@ Console.WriteLine(hero.Hp);
 */
 
 string[] map = {
-    "###########",
-    "#.........#",
-    "#.........#",
-    "#.........#",
-    "#.........#",
+    "###########",// 0
+    "#.........#", // 1
+    "#.........#", // 2
+    "#.........#", // 3
+    "#.........#", // ...
     "#.........#",
     "#.........#",
     "#.........#",
@@ -55,7 +55,8 @@ foreach (string row in map)
 
 while (true)
 {
-    string previousRow = map[hero.PreviousPosition.Y];
+    int rowIndex = hero.PreviousPosition.Y;
+    string previousRow = map[rowIndex];
     char previousCell = previousRow[hero.PreviousPosition.X];
     Console.SetCursorPosition(hero.PreviousPosition.X, hero.PreviousPosition.Y);
     Console.WriteLine(previousCell);
@@ -63,5 +64,9 @@ while (true)
     Console.SetCursorPosition(hero.Position.X, hero.Position.Y);
     Console.Write("@");
     //Console.WriteLine($"X: {hero.X} Y: {hero.Y}");
-    hero.Move();
+    Point nextPosition = hero.GetNextPosition();
+    if (nextPosition.Y >= 0 && nextPosition.Y < map.Length)
+    {
+        hero.Move(nextPosition);
+    }
 }
