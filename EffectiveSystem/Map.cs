@@ -2,24 +2,27 @@ class Map
 {
     public Point Origin { get; set; }
     private int[][] mapData;
-    private Dictionary<int, char> cellVisuals = new Dictionary<int, char>() {
-        { 0, '.'},
-        { 1, '+'},
-        { 2, '-'},
-        { 3, '|'},
-        { 9, ' '},
-        { 4, '#'},
+    private Dictionary<CellType, char> cellVisuals = new Dictionary<CellType, char>() {
+        { CellType.Floor, '.'},
+        { CellType.WallCorner, '+'},
+        { CellType.WallHorizontal, '-'},
+        { CellType.WallVertical, '|'},
+        { CellType.Empty, ' '},
+        { CellType.Grass, '#'},
     };
 
-    private Dictionary<int, ConsoleColor> colorMap = new Dictionary<int,ConsoleColor>() {
-        { 0, ConsoleColor.Magenta },
-        { 1, ConsoleColor.Blue },
-        { 2, ConsoleColor.Blue },
-        { 3, ConsoleColor.Blue },
-        { 4, ConsoleColor.Green },
+    private Dictionary<CellType, ConsoleColor> colorMap = new Dictionary<CellType, ConsoleColor>() {
+        { CellType.Floor, ConsoleColor.Magenta },
+        { CellType.WallCorner, ConsoleColor.Blue },
+        { CellType.WallHorizontal, ConsoleColor.Blue },
+        { CellType.WallVertical, ConsoleColor.Blue },
+        { CellType.Grass, ConsoleColor.Green },
     };
 
-    private int[] walkableCellTypes = new int[] { 0, 4};
+    private CellType[] walkableCellTypes = new CellType[] {
+        CellType.Floor,
+        CellType.Grass,
+    };
 
     public Map()
     {
@@ -46,7 +49,7 @@ class Map
             Console.CursorLeft = origin.X;
             for (int x = 0; x < mapData[y].Length; x++)
             {
-                int cellValue = mapData[y][x];
+                var cellValue = GetCellAt(x, y);
                 char cellVisual = cellVisuals.GetValueOrDefault(cellValue, '?');
 
                 Console.ForegroundColor = GetColorByCellType(cellValue);
@@ -57,14 +60,20 @@ class Map
         }
     }
 
-    private ConsoleColor GetColorByCellType(int value)
+
+    private ConsoleColor GetColorByCellType(CellType cellType)
     {
-        return colorMap.GetValueOrDefault(value, ConsoleColor.Gray);
+        return colorMap.GetValueOrDefault(cellType, ConsoleColor.Gray);
     }
 
-    internal int GetCellAt(Point point)
+    internal CellType GetCellAt(Point point)
     {
-        return mapData[point.Y][point.X];
+        return GetCellAt(point.X, point.Y);
+    }
+
+    private CellType GetCellAt(int x, int y)
+    {
+        return (CellType)mapData[y][x];
     }
 
     internal char GetCellVisualAt(Point point)
