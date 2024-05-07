@@ -4,22 +4,27 @@ class Map
     private int[][] mapData;
     private Dictionary<int, char> cellVisuals = new Dictionary<int, char>() {
         { 0, '.'},
-        { 1, '#'},
-        { 9, ' '}
+        { 1, '+'},
+        { 2, '-'},
+        { 3, '|'},
+        { 9, ' '},
+        { 4, '#'},
     };
+
+    private int[] walkableCellTypes = new int[] { 0, 4};
 
     public Map()
     {
         mapData = new int[][] {
-            new int[] {1,1,1,9,9,1,1,1,1,9,9,9,9,},
-            new int[] {1,0,1,9,9,1,0,0,1,9,9,9,9,},
-            new int[] {1,0,1,9,9,1,0,0,1,1,1,1,1,},
-            new int[] {1,0,1,9,9,9,1,0,1,0,0,0,1,},
-            new int[] {1,0,1,1,1,1,1,0,0,0,0,0,1,},
-            new int[] {1,0,0,0,0,0,0,0,0,0,0,0,1,},
-            new int[] {1,1,1,1,0,0,0,0,0,0,0,0,1,},
-            new int[] {9,9,9,1,0,0,0,0,0,0,0,0,1,},
-            new int[] {9,9,9,1,1,1,1,1,1,1,1,1,1,},
+            new int[] {1,2,1,9,9,1,2,2,1,9,9,9,9,},
+            new int[] {3,0,3,9,9,3,0,0,3,9,9,9,9,},
+            new int[] {3,0,3,9,9,1,0,0,1,2,2,2,1,},
+            new int[] {3,0,3,9,9,9,1,4,1,0,0,0,3,},
+            new int[] {3,0,1,2,2,2,1,0,0,0,0,0,3,},
+            new int[] {3,4,0,0,0,0,0,0,0,0,0,0,3,},
+            new int[] {1,2,2,1,0,0,0,0,4,4,0,0,3,},
+            new int[] {9,9,9,3,0,0,0,0,0,0,0,0,3,},
+            new int[] {9,9,9,1,2,2,2,2,2,2,2,2,1,},
         };
         Origin = new Point(0, 0);
     }
@@ -57,7 +62,7 @@ class Map
         {
             if (point.X >= 0 && point.X < mapData[point.Y].Length)
             {
-                if (GetCellAt(point) != 1)
+                if (walkableCellTypes.Contains(GetCellAt(point)))
                 {
                     return true;
                 }
