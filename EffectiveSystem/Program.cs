@@ -8,11 +8,8 @@ map.Display(new Point(15, 2));
 while (true)
 {
     var previousCell = map.GetCellVisualAt(hero.PreviousPosition);
-    Console.SetCursorPosition(hero.PreviousPosition.X + map.Origin.X, hero.PreviousPosition.Y + map.Origin.Y);
-    Console.Write(previousCell);
-
-    Console.SetCursorPosition(hero.Position.X + map.Origin.X, hero.Position.Y + map.Origin.Y);
-    Console.Write("@");
+    map.DrawSomethingAt(previousCell, hero.PreviousPosition);
+    map.DrawSomethingAt('@', hero.Position);
     
     Point nextPosition = hero.GetNextPosition();
     if (map.IsPointValid(nextPosition))

@@ -66,4 +66,10 @@ class Map
 
         return false;
     }
+
+    internal void DrawSomethingAt(char visual, Point position)
+    {
+        Console.SetCursorPosition(position.X + Origin.X, position.Y + Origin.Y);
+        Console.Write(visual);
+    }
 }
