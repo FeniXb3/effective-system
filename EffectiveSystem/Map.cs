@@ -49,12 +49,17 @@ class Map
                 int cellValue = mapData[y][x];
                 char cellVisual = cellVisuals.GetValueOrDefault(cellValue, '?');
 
-                Console.ForegroundColor = colorMap.GetValueOrDefault(cellValue, ConsoleColor.Gray);
+                Console.ForegroundColor = GetColorByCellType(cellValue);
                 Console.Write(cellVisual);
                 Console.ResetColor();
             }
             Console.WriteLine();
         }
+    }
+
+    private ConsoleColor GetColorByCellType(int value)
+    {
+        return colorMap.GetValueOrDefault(value, ConsoleColor.Gray);
     }
 
     internal int GetCellAt(Point point)
@@ -87,5 +92,12 @@ class Map
     {
         Console.SetCursorPosition(position.X + Origin.X, position.Y + Origin.Y);
         Console.Write(visual);
+    }
+
+    internal void RedrawCellAt(Point position)
+    {
+        Console.ForegroundColor = GetColorByCellType(GetCellAt(position));;
+        DrawSomethingAt(GetCellVisualAt(position), position);
+        Console.ResetColor();
     }
 }
