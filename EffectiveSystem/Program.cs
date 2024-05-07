@@ -3,15 +3,15 @@ Player hero = new Player(playerPosition);
 Map map = new Map();
 
 Console.Clear();
-map.Display();
+map.Display(new Point(15, 2));
 
 while (true)
 {
     var previousCell = map.GetCellVisualAt(hero.PreviousPosition);
-    Console.SetCursorPosition(hero.PreviousPosition.X, hero.PreviousPosition.Y);
-    Console.WriteLine(previousCell);
+    Console.SetCursorPosition(hero.PreviousPosition.X + map.Origin.X, hero.PreviousPosition.Y + map.Origin.Y);
+    Console.Write(previousCell);
 
-    Console.SetCursorPosition(hero.Position.X, hero.Position.Y);
+    Console.SetCursorPosition(hero.Position.X + map.Origin.X, hero.Position.Y + map.Origin.Y);
     Console.Write("@");
     
     Point nextPosition = hero.GetNextPosition();
