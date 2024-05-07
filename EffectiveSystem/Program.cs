@@ -1,4 +1,5 @@
-﻿Point playerPosition = new Point(10, 3);
+﻿Console.CursorVisible = false;
+Point playerPosition = new Point(10, 3);
 Player hero = new Player(playerPosition);
 Map map = new Map();
 
@@ -8,7 +9,7 @@ map.Display(new Point(15, 2));
 while (true)
 {
     map.RedrawCellAt(hero.PreviousPosition);
-    map.DrawSomethingAt('@', hero.Position);
+    map.DrawSomethingAt(hero.Visuals, hero.Position);
     
     Point nextPosition = hero.GetNextPosition();
     if (map.IsPointValid(nextPosition))

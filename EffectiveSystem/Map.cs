@@ -103,6 +103,12 @@ class Map
         Console.Write(visual);
     }
 
+    internal void DrawSomethingAt(string visual, Point position)
+    {
+        Console.SetCursorPosition(position.X + Origin.X, position.Y + Origin.Y);
+        Console.Write(visual);
+    }
+
     internal void RedrawCellAt(Point position)
     {
         Console.ForegroundColor = GetColorByCellType(GetCellAt(position));;

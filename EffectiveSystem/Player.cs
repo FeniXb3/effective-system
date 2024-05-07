@@ -1,5 +1,6 @@
 class Player
 {
+    public string Visuals { get; set; }  = "@";
     public int Hp
     { 
         get => hp;
