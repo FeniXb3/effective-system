@@ -11,6 +11,14 @@ class Map
         { 4, '#'},
     };
 
+    private Dictionary<int, ConsoleColor> colorMap = new Dictionary<int,ConsoleColor>() {
+        { 0, ConsoleColor.Magenta },
+        { 1, ConsoleColor.Blue },
+        { 2, ConsoleColor.Blue },
+        { 3, ConsoleColor.Blue },
+        { 4, ConsoleColor.Green },
+    };
+
     private int[] walkableCellTypes = new int[] { 0, 4};
 
     public Map()
@@ -40,7 +48,10 @@ class Map
             {
                 int cellValue = mapData[y][x];
                 char cellVisual = cellVisuals.GetValueOrDefault(cellValue, '?');
+
+                Console.ForegroundColor = colorMap.GetValueOrDefault(cellValue, ConsoleColor.Gray);
                 Console.Write(cellVisual);
+                Console.ResetColor();
             }
             Console.WriteLine();
         }
