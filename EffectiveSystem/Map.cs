@@ -9,20 +9,21 @@ class Map
     private Dictionary<int, char> cellVisuals = new Dictionary<int, char>() {
         { 0, '.'},
         { 1, '#'},
+        { 9, ' '}
     };
 
     public Map()
     {
         mapData = new int[][] {
-            new int[] {1,1,1,1,1,1,1,1,1,1,1,},
-            new int[] {1,0,0,0,0,0,0,0,0,0,1,},
-            new int[] {1,0,0,0,0,0,0,0,0,0,1,},
-            new int[] {1,0,0,0,0,0,0,0,0,0,1,},
-            new int[] {1,0,0,0,0,1,0,0,0,0,1,},
-            new int[] {1,0,0,0,0,0,0,0,0,0,1,},
-            new int[] {1,0,0,1,0,0,0,0,0,0,1,},
-            new int[] {1,0,0,0,0,0,0,0,0,0,1,},
-            new int[] {1,1,1,1,1,1,1,1,1,1,1,},
+            new int[] {1,1,1,9,9,1,1,1,1,9,9,9,9,},
+            new int[] {1,0,1,9,9,1,0,0,1,9,9,9,9,},
+            new int[] {1,0,1,9,9,1,0,0,1,1,1,1,1,},
+            new int[] {1,0,1,9,9,9,1,0,1,0,0,0,1,},
+            new int[] {1,0,1,1,1,1,1,0,0,0,0,0,1,},
+            new int[] {1,0,0,0,0,0,0,0,0,0,0,0,1,},
+            new int[] {1,1,1,1,0,0,0,0,0,0,0,0,1,},
+            new int[] {9,9,9,1,0,0,0,0,0,0,0,0,1,},
+            new int[] {9,9,9,1,1,1,1,1,1,1,1,1,1,},
         };
     }
 
@@ -37,7 +38,8 @@ class Map
             for (int x = 0; x < mapData[y].Length; x++)
             {
                 int cellValue = mapData[y][x];
-                char cellVisual = cellVisuals[cellValue];
+                // char cellVisual = cellVisuals[cellValue];
+                char cellVisual = cellVisuals.GetValueOrDefault(cellValue, '?');
                 Console.Write(cellVisual);
             }
             Console.WriteLine();
