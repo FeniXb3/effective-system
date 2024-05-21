@@ -16,24 +16,33 @@ Character[] characters = new Character[]
 Map map = new Map();
 
 Console.Clear();
-map.Display(new Point(15, 2));
 
-foreach (Character character in characters)
+try
 {
-    map.DrawSomethingAt(character.Visuals, character.Position);
-}
+    map.Display(new Point(15, 2));
 
-while (true)
-{
     foreach (Character character in characters)
     {
-        Point nextPosition = character.GetNextPosition();
-        if (map.IsPointValid(nextPosition))
-        {
-            character.Move(nextPosition);
+        map.DrawSomethingAt(character.Visuals, character.Position);
+    }
 
-            map.RedrawCellAt(character.PreviousPosition);
-            map.DrawSomethingAt(character.Visuals, character.Position);
+    while (true)
+    {
+        foreach (Character character in characters)
+        {
+            Point nextPosition = character.GetNextPosition();
+            if (map.IsPointValid(nextPosition))
+            {
+                character.Move(nextPosition);
+
+                map.RedrawCellAt(character.PreviousPosition);
+                map.DrawSomethingAt(character.Visuals, character.Position);
+            }
         }
     }
+
+}
+catch (ArgumentOutOfRangeException exception)
+{
+    Console.WriteLine("Terminal window is too small. Make it bigger to play");
 }
