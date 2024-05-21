@@ -17,7 +17,8 @@ Map map = new Map();
 
 Console.Clear();
 
-try
+if (map.Size.X + map.Origin.X >= 0 && map.Size.X + map.Origin.X < Console.BufferWidth
+    && map.Size.Y + map.Origin.Y >= 0 && map.Size.Y + map.Origin.Y < Console.BufferHeight)
 {
     map.Display(new Point(15, 2));
 
@@ -25,6 +26,7 @@ try
     {
         map.DrawSomethingAt(character.Visuals, character.Position);
     }
+    
 
     while (true)
     {
@@ -42,7 +44,7 @@ try
     }
 
 }
-catch (ArgumentOutOfRangeException exception)
+else
 {
-    Console.WriteLine("Terminal window is too small. Make it bigger to play");
+    Console.WriteLine($"Terminal window is too small. Make it bigger (at least ({map.Size.X + map.Origin.X}, {map.Size.Y + map.Origin.Y})) to play");
 }

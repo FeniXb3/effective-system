@@ -1,6 +1,7 @@
 class Map
 {
     public Point Origin { get; set; }
+    public Point Size { get; }
     private int[][] mapData;
     private Dictionary<CellType, char> cellVisuals = new Dictionary<CellType, char>() {
         { CellType.Floor, '.'},
@@ -29,14 +30,30 @@ class Map
         mapData = new int[][] {
             new int[] {1,2,1,9,9,1,2,2,1,9,9,9,9,},
             new int[] {3,0,3,9,9,3,0,0,3,9,9,9,9,},
-            new int[] {3,0,3,9,9,1,0,0,1,2,2,2,1,},
-            new int[] {3,0,3,9,9,9,1,4,1,0,0,0,3,},
-            new int[] {3,0,1,2,2,2,1,0,0,0,0,0,3,},
+            new int[] {3,0,3,9,9,1,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,},
+            new int[] {3,0,3,9,9,9,1,4,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,},
+            new int[] {3,0,1,2,2,2,1,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,1,},
             new int[] {3,4,0,0,0,0,0,0,0,0,0,0,3,},
             new int[] {1,2,2,1,0,0,0,0,4,4,0,0,3,},
             new int[] {9,9,9,3,0,0,0,0,0,0,0,0,3,},
             new int[] {9,9,9,1,2,2,2,2,2,2,2,2,1,},
         };
+
+        // potrzebuje zwrocic punkt, ktory bedzierozmiarem planszy:
+        // y ma byc rowny liczbie wierszy
+        // x ma byc rowny dlugosci najszerszego wiersza
+        int y = mapData.Length;
+        int x = 0;
+
+        foreach (int[] row in mapData)
+        {
+            if (row.Length > x)
+            {
+                x = row.Length;
+            }
+        }
+
+        Size = new Point(x, y);
         Origin = new Point(0, 0);
     }
 
