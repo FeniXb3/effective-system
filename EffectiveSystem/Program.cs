@@ -6,41 +6,34 @@ Player anotherHero = new Player("Q", new Point(1, 1));
 
 Enemy troll = new Enemy("T", new Point(4, 6));
 
+Character[] characters = new Character[] 
+{
+    hero,
+    anotherHero,
+    troll,
+};
+
 Map map = new Map();
 
 Console.Clear();
 map.Display(new Point(15, 2));
 
-map.DrawSomethingAt(hero.Visuals, hero.Position);
-map.DrawSomethingAt(anotherHero.Visuals, anotherHero.Position);
-map.DrawSomethingAt(troll.Visuals, troll.Position);
+foreach (Character character in characters)
+{
+    map.DrawSomethingAt(character.Visuals, character.Position);
+}
 
 while (true)
 {
-    Point nextPosition = hero.GetNextPosition();
-    if (map.IsPointValid(nextPosition))
+    foreach (Character character in characters)
     {
-        hero.Move(nextPosition);
+        Point nextPosition = character.GetNextPosition();
+        if (map.IsPointValid(nextPosition))
+        {
+            character.Move(nextPosition);
 
-        map.RedrawCellAt(hero.PreviousPosition);
-        map.DrawSomethingAt(hero.Visuals, hero.Position);
-    }
-
-    Point anotherNextPosition = anotherHero.GetNextPosition();
-    if (map.IsPointValid(anotherNextPosition))
-    {
-        anotherHero.Move(anotherNextPosition);
-
-        map.RedrawCellAt(anotherHero.PreviousPosition);
-        map.DrawSomethingAt(anotherHero.Visuals, anotherHero.Position);
-    }
-
-    Point trollNextPosition = troll.GetNextPosition();
-    if (map.IsPointValid(trollNextPosition))
-    {
-        troll.Move(trollNextPosition);
-
-        map.RedrawCellAt(troll.PreviousPosition);
-        map.DrawSomethingAt(troll.Visuals, troll.Position);
+            map.RedrawCellAt(character.PreviousPosition);
+            map.DrawSomethingAt(character.Visuals, character.Position);
+        }
     }
 }
