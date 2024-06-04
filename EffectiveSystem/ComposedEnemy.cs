@@ -1,4 +1,4 @@
-class ComposedPlayer
+class ComposedEnemy
 {
     public VisualComponent VisualComponent { get; }
     public HealthComponent HealthComponent { get; }
@@ -6,11 +6,11 @@ class ComposedPlayer
     public PositionComponent PositionComponent { get; private set; }
     public MovementComponent MovementComponent { get; }
 
-    public ComposedPlayer(string visuals, Point startingPosition)
+    public ComposedEnemy(string visuals, Point startingPosition)
     {
         VisualComponent = new VisualComponent(visuals);
         HealthComponent = new HealthComponent();
-        InputComponent = new KeyboardInputComponent();
+        InputComponent = new RandomInputComponent();
         PositionComponent = new PositionComponent(startingPosition);
         MovementComponent = new MovementComponent(PositionComponent, InputComponent, startingPosition);
     }

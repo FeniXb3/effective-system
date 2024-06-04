@@ -2,6 +2,7 @@
 Point playerPosition = new Point(10, 3);
 
 ComposedPlayer composedPlayer = new ComposedPlayer("@", playerPosition);
+ComposedEnemy composedEnemy = new ComposedEnemy("T", new Point(4, 6));
 
 Player hero = new Player("@", playerPosition);
 Player anotherHero = new Player("Q", new Point(1, 1));
@@ -28,6 +29,7 @@ if (map.Size.X + map.Origin.X >= 0 && map.Size.X + map.Origin.X < Console.Buffer
     map.Display(new Point(15, 2));
 
     map.DrawSomethingAt(composedPlayer.VisualComponent.Visuals, composedPlayer.PositionComponent.Position);
+    map.DrawSomethingAt(composedEnemy.VisualComponent.Visuals, composedEnemy.PositionComponent.Position);
 
     // foreach (Character character in characters)
     // {
@@ -44,6 +46,15 @@ if (map.Size.X + map.Origin.X >= 0 && map.Size.X + map.Origin.X < Console.Buffer
 
             map.RedrawCellAt(composedPlayer.MovementComponent.PreviousPosition);
             map.DrawSomethingAt(composedPlayer.VisualComponent.Visuals, composedPlayer.PositionComponent.Position);
+        }
+
+        nextPosition = composedEnemy.MovementComponent.GetNextPosition();
+        if (map.IsPointValid(nextPosition))
+        {
+            composedEnemy.MovementComponent.Move(nextPosition);
+
+            map.RedrawCellAt(composedEnemy.MovementComponent.PreviousPosition);
+            map.DrawSomethingAt(composedEnemy.VisualComponent.Visuals, composedEnemy.PositionComponent.Position);
         }
         // foreach (Character character in characters)
         // {
