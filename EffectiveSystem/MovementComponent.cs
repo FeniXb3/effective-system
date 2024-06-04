@@ -2,9 +2,9 @@ internal class MovementComponent
 {
     public Point PreviousPosition { get; set;}
     private readonly PositionComponent positionComponent;
-    private readonly InputComponent inputComponent;
+    private readonly IInputComponent inputComponent;
 
-    public MovementComponent(PositionComponent positionComponent, InputComponent inputComponent, Point startingPosition)
+    public MovementComponent(PositionComponent positionComponent, IInputComponent inputComponent, Point startingPosition)
     {
         PreviousPosition = new Point(startingPosition);
         this.positionComponent = positionComponent;

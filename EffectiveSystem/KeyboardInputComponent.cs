@@ -1,4 +1,4 @@
-internal class KeyboardInputComponent : InputComponent
+internal class KeyboardInputComponent : IInputComponent
 {
     private Dictionary<ConsoleKey, Point> directions;
     public KeyboardInputComponent()
@@ -13,7 +13,7 @@ internal class KeyboardInputComponent : InputComponent
         };
     }
 
-    public override Point GetDirection()
+    public Point GetDirection()
     {
         ConsoleKeyInfo pressedKey = Console.ReadKey(true);
         if (directions.ContainsKey(pressedKey.Key))

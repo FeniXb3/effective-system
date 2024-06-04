@@ -1,4 +1,4 @@
-internal class RandomInputComponent : InputComponent
+internal class RandomInputComponent : IInputComponent
 {
     Random rng;
 
@@ -7,7 +7,7 @@ internal class RandomInputComponent : InputComponent
         rng = new Random();
     }
 
-    public override Point GetDirection()
+    public Point GetDirection()
     {
         return new Point(rng.Next(-1, 2), rng.Next(-1, 2));
     }

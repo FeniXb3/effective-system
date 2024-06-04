@@ -2,7 +2,7 @@ class ComposedEnemy
 {
     public VisualComponent VisualComponent { get; }
     public HealthComponent HealthComponent { get; }
-    public InputComponent InputComponent { get; }
+    public IInputComponent InputComponent { get; }
     public PositionComponent PositionComponent { get; private set; }
     public MovementComponent MovementComponent { get; }
 
