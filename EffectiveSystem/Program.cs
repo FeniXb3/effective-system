@@ -25,6 +25,24 @@ if (map.Size.X + map.Origin.X >= 0 && map.Size.X + map.Origin.X < Console.Buffer
 
             map.RedrawCellAt(composedPlayer.MovementComponent.PreviousPosition);
             map.DrawSomethingAt(composedPlayer.VisualComponent.Visuals, composedPlayer.PositionComponent.Position);
+
+            int distanceX = Math.Abs(composedPlayer.PositionComponent.Position.X - composedEnemy.PositionComponent.Position.X);
+            int distanceY = Math.Abs(composedPlayer.PositionComponent.Position.Y - composedEnemy.PositionComponent.Position.Y);
+
+            if (distanceX <= 1 && distanceY <= 1)
+            {
+                Console.SetCursorPosition(2, 0);
+                Console.WriteLine("Enemy is nerby! Attacking! Press any key to continue");
+                Console.ReadKey(true);
+                
+                Console.SetCursorPosition(2, 0);
+                Console.WriteLine("Enemy is nerby! Attacked!                             ");
+            }
+            else
+            {
+                Console.SetCursorPosition(2, 0);
+                Console.WriteLine("                          ");
+            }
         }
 
         nextPosition = composedEnemy.MovementComponent.GetNextPosition();
