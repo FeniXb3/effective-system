@@ -13,4 +13,9 @@ internal class HealthComponent
     {
         Hp += 10;
     }
+
+    public void TakeDamage(int amount)
+    {
+        Hp -= amount;
+    } 
 }
