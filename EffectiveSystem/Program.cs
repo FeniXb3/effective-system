@@ -19,14 +19,6 @@ Character[] characters = new Character[]
     whipingWillow,
 };
 
-MovementComponent[] movements = new MovementComponent[]
-{
-    composedPlayer.MovementComponent,
-    composedEnemy.MovementComponent,
-};
-
-
-
 Map map = new Map();
 
 Console.Clear();
@@ -47,18 +39,23 @@ if (map.Size.X + map.Origin.X >= 0 && map.Size.X + map.Origin.X < Console.Buffer
 
     while (true)
     {
-        foreach (var movementComponent in movements)
+        Point nextPosition = composedPlayer.MovementComponent.GetNextPosition();
+        if (map.IsPointValid(nextPosition))
         {
-            var position = movementComponent.GetNextPosition();
-            if (map.IsPointValid(position))
-            {
-                movementComponent.Move(position);
-            }
-            map.RedrawCellAt(movementComponent.PreviousPosition);
+            composedPlayer.MovementComponent.Move(nextPosition);
+
+            map.RedrawCellAt(composedPlayer.MovementComponent.PreviousPosition);
+            map.DrawSomethingAt(composedPlayer.VisualComponent.Visuals, composedPlayer.PositionComponent.Position);
         }
 
-        map.DrawSomethingAt(composedPlayer.VisualComponent.Visuals, composedPlayer.PositionComponent.Position);
-        map.DrawSomethingAt(composedEnemy.VisualComponent.Visuals, composedEnemy.PositionComponent.Position);
+        nextPosition = composedEnemy.MovementComponent.GetNextPosition();
+        if (map.IsPointValid(nextPosition))
+        {
+            composedEnemy.MovementComponent.Move(nextPosition);
+
+            map.RedrawCellAt(composedEnemy.MovementComponent.PreviousPosition);
+            map.DrawSomethingAt(composedEnemy.VisualComponent.Visuals, composedEnemy.PositionComponent.Position);
+        }
         // foreach (Character character in characters)
         // {
         //     Point nextPosition = character.GetNextPosition();
