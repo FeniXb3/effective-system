@@ -29,7 +29,7 @@ if (map.Size.X + map.Origin.X >= 0 && map.Size.X + map.Origin.X < Console.Buffer
             int distanceX = Math.Abs(composedPlayer.PositionComponent.Position.X - composedEnemy.PositionComponent.Position.X);
             int distanceY = Math.Abs(composedPlayer.PositionComponent.Position.Y - composedEnemy.PositionComponent.Position.Y);
 
-            if (distanceX <= 1 && distanceY <= 1)
+            if ((distanceX == 1 && distanceY == 0) || (distanceX == 0 && distanceY == 1))
             {
                 Console.SetCursorPosition(2, 0);
                 Console.WriteLine("Enemy is nerby! Attacking! Press any key to continue");
