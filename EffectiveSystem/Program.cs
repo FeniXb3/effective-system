@@ -4,21 +4,6 @@ Point playerPosition = new Point(10, 3);
 ComposedPlayer composedPlayer = new ComposedPlayer("@", playerPosition);
 ComposedEnemy composedEnemy = new ComposedEnemy("T", new Point(4, 6));
 
-Player hero = new Player("@", playerPosition);
-Player anotherHero = new Player("Q", new Point(1, 1));
-
-Enemy troll = new Enemy("T", new Point(4, 6));
-
-StaticEnemy whipingWillow = new StaticEnemy("W", new Point(5, 6));
-
-Character[] characters = new Character[] 
-{
-    hero,
-    anotherHero,
-    troll,
-    whipingWillow,
-};
-
 Map map = new Map();
 
 Console.Clear();
@@ -30,12 +15,6 @@ if (map.Size.X + map.Origin.X >= 0 && map.Size.X + map.Origin.X < Console.Buffer
 
     map.DrawSomethingAt(composedPlayer.VisualComponent.Visuals, composedPlayer.PositionComponent.Position);
     map.DrawSomethingAt(composedEnemy.VisualComponent.Visuals, composedEnemy.PositionComponent.Position);
-
-    // foreach (Character character in characters)
-    // {
-    //     map.DrawSomethingAt(character.Visuals, character.Position);
-    // }
-    
 
     while (true)
     {
@@ -56,19 +35,7 @@ if (map.Size.X + map.Origin.X >= 0 && map.Size.X + map.Origin.X < Console.Buffer
             map.RedrawCellAt(composedEnemy.MovementComponent.PreviousPosition);
             map.DrawSomethingAt(composedEnemy.VisualComponent.Visuals, composedEnemy.PositionComponent.Position);
         }
-        // foreach (Character character in characters)
-        // {
-        //     Point nextPosition = character.GetNextPosition();
-        //     if (map.IsPointValid(nextPosition))
-        //     {
-        //         character.Move(nextPosition);
-
-        //         map.RedrawCellAt(character.PreviousPosition);
-        //         map.DrawSomethingAt(character.Visuals, character.Position);
-        //     }
-        // }
     }
-
 }
 else
 {
